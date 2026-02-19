@@ -6,7 +6,7 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/19 15:09:23 by htoe              #+#    #+#              #
-#    Updated: 2026/02/19 16:20:50 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/19 16:22:20 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,7 @@ clean:
 #@make clean -s -C libft
 
 fclean: clean
-	@${RM} ${NAME1}
-	@${RM} ${NAME2}
+	@${RM} ${NAME}
 #@make fclean -s -C libft
 
 re: fclean all
