@@ -6,7 +6,7 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/19 15:09:23 by htoe              #+#    #+#              #
-#    Updated: 2026/02/19 19:22:05 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/21 16:28:43 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ RM = rm -Rf
 #Directories
 SRCDIR = srcs
 OBJDIR = objs
+MLX_BUILD = MLX42/build
 
 #Sources
 SRCS = ${wildcard ${SRCDIR}/*.c}
@@ -38,7 +39,8 @@ ${OBJDIR}/%.o: ${SRCDIR}/%.c Makefile
 
 ${MLXLIB}:
 	@echo "COMPILING MLX"
-	@make -s -C MLX42/build
+	@cmake -S MLX42 -B ${MLX_BUILD}
+	@make -s -C ${MLX_BUILD}
 
 ${LIB}:
 	@echo "COMPILING LIBFT"
@@ -54,11 +56,14 @@ all: ${NAME}
 clean:
 	@echo "CLEANING"
 	@${RM} ${OBJDIR}
-	@make clean -s -C MLX42/build
+	@if [ -d ${MLX_BUILD} ]; then \
+		cmake --build ${MLX_BUILD} --target clean; \
+	fi
 #@make clean -s -C libft
 
 fclean: clean
 	@${RM} ${NAME}
+	@${RM} ${MLX_BUILD}
 #@make fclean -s -C libft
 
 re: fclean all
