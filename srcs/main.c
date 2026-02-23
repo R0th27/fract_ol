@@ -1,83 +1,64 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <MLX42/MLX42.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/23 17:12:29 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/23 18:17:03 by htoe             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define WIDTH 512
-#define HEIGHT 512
+#include "fractol.h"
 
-static mlx_image_t* image;
-
-// -----------------------------------------------------------------------------
-
-int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
+double	ft_atod(char *s)
 {
-    return (r << 24 | g << 16 | b << 8 | a);
-}
+	double	result;
+	double	sign;
+	double	frac;
 
-void ft_randomize(void* param)
-{
-	(void)param;
-	for (uint32_t i = 0; i < image->width; ++i)
+	result = 0;
+	sign = 1;
+	frac = 0.1;
+	if (*s == '+' || *s == '-')
+		sign = 44 - *s++;
+	while (*s >= '0' && *s <= '9')
+		result = result * 10 + (*s++ - '0');
+	if (*s == '.')
 	{
-		for (uint32_t y = 0; y < image->height; ++y)
+		s++;
+		while (*s >= '0' && *s <= '9')
 		{
-			uint32_t color = ft_pixel(
-				rand() % 0xFF, // R
-				rand() % 0xFF, // G
-				rand() % 0xFF, // B
-				rand() % 0xFF  // A
-			);
-			mlx_put_pixel(image, i, y, color);
+			result += (*s++ - '0') * frac;
+			frac *= 0.1;
 		}
 	}
+	return (result * sign);		
 }
 
-void ft_hook(void* param)
+int	parse_args(int ac, char **av, t_fractal *f)
 {
-	mlx_t* mlx = param;
-
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		image->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		image->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		image->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		image->instances[0].x += 5;
+	if (ac < 2)
+		return (usage_error(), 0);
+	if (!ft_strncmp(av[1], "mandelbrot", 11) && ac == 2)
+		f->type = MANDELBROT;
+	else if (!ft_strncmp(av[1], "julia", 6) && ac == 4)
+	{
+		f->type = JULIA;
+		f->julia_cr = ft_atod(av[2]);
+		f->julia_ci = ft_atod(av[2]);
+	}
+	else
+		return (usage_error(), 0);
+	return (1);
 }
 
-// -----------------------------------------------------------------------------
-
-int32_t main(void)
+int	main(int argc, char **argv)
 {
-	mlx_t* mlx;
+	t_fractal	f;
 
-	// Gotta error check this stuff
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-	{
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (!(image = mlx_new_image(mlx, 128, 128)))
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	
-	mlx_loop_hook(mlx, ft_randomize, mlx);
-	mlx_loop_hook(mlx, ft_hook, mlx);
-
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	if (!parse_args(argc, argv, &f))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
