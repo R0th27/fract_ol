@@ -6,7 +6,7 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/19 15:09:23 by htoe              #+#    #+#              #
-#    Updated: 2026/02/23 17:22:56 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/26 17:44:53 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ MLXLIB 		:= MLX42/build/libmlx42.a
 #Pattern Rules
 
 ${OBJDIR}/%.o: ${SRCDIR}/%.c Makefile
-	@echo "COMPILING FRACT_OL"
 	@mkdir -p ${dir $@}
 	@${CC} ${CFLAGS} ${CINCLUDE} -c $< -o $@
 
@@ -53,6 +52,7 @@ ${LIB}:
 
 ${NAME}: Makefile ${OBJS} ${LIB} ${MLXLIB}
 	@echo "LINKING FRACT_OL"
+	@echo "COMPILING FRACT_OL"
 	@${CC} ${OBJS} ${LIBFLAGS} -o ${NAME}
 
 all: ${NAME}

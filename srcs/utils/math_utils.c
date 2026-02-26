@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 17:12:29 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 18:09:48 by htoe             ###   ########.fr       */
+/*   Created: 2026/02/26 18:09:15 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/26 18:10:16 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	main(int argc, char **argv)
+double	ft_atod(char *s)
 {
-	t_fractal	f;
+	double	result;
+	double	sign;
+	double	frac;
 
-	if (!parse_args(argc, argv, &f))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	result = 0;
+	sign = 1;
+	frac = 0.1;
+	if (*s == '+' || *s == '-')
+		sign = 44 - *s++;
+	while (*s >= '0' && *s <= '9')
+		result = result * 10 + (*s++ - '0');
+	if (*s == '.')
+	{
+		s++;
+		while (*s >= '0' && *s <= '9')
+		{
+			result += (*s++ - '0') * frac;
+			frac *= 0.1;
+		}
+	}
+	return (result * sign);
 }
