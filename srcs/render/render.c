@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_utils.c                                       :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/26 18:09:15 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 19:38:27 by htoe             ###   ########.fr       */
+/*   Created: 2026/02/26 19:15:07 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/26 20:24:40 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	ft_atod(char *s)
+void	render(t_fractal *f)
 {
-	double	result;
-	double	sign;
-	double	frac;
+	int			x;
+	int			y;
+	t_complex	p;
+	double		mu;
+	int			color;
 
-	result = 0;
-	sign = 1;
-	frac = 0.1;
-	if (*s == '+' || *s == '-')
-		sign = 44 - *s++;
-	while (*s >= '0' && *s <= '9')
-		result = result * 10 + (*s++ - '0');
-	if (*s == '.')
+	(void)color;
+	update_iterations(f);
+	y = -1;
+	while (++y < HEIGHT)
 	{
-		s++;
-		while (*s >= '0' && *s <= '9')
+		x = -1;
+		while (++x < WIDTH)
 		{
-			result += (*s++ - '0') * frac;
-			frac *= 0.1;
+			p = interpolation(x, y, f);
+			mu = iterate(p, f);
+			color = get_color(mu, f);
+			mlx_put_pixel(f->img, x, y, color);
 		}
 	}
-	return (result * sign);
 }

@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:29 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 19:00:41 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/26 20:24:31 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (!init_fractal(&f))
 		return (EXIT_FAILURE);
+	render(&f);
 	mlx_loop(f.mlx);
 	mlx_terminate(f.mlx);
 	return (EXIT_SUCCESS);

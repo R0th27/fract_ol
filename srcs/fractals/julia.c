@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_utils.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/26 18:09:15 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 19:38:27 by htoe             ###   ########.fr       */
+/*   Created: 2026/02/26 19:45:57 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/26 19:48:57 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	ft_atod(char *s)
+double	julia(t_complex z, t_fractal *f)
 {
-	double	result;
-	double	sign;
-	double	frac;
+	double		tmp;
+	t_complex	c;
+	int			i;
 
-	result = 0;
-	sign = 1;
-	frac = 0.1;
-	if (*s == '+' || *s == '-')
-		sign = 44 - *s++;
-	while (*s >= '0' && *s <= '9')
-		result = result * 10 + (*s++ - '0');
-	if (*s == '.')
+	c.r = f->julia_cr;
+	c.i = f->julia_ci;
+	i = 0;
+	while ((z.r * z.r) + (z.i * z.i) <= 4 && i < f->max_iter)
 	{
-		s++;
-		while (*s >= '0' && *s <= '9')
-		{
-			result += (*s++ - '0') * frac;
-			frac *= 0.1;
-		}
+		tmp = (z.r * z.r) - (z.i * z.i) + c.r;
+		z.i = (2 * z.r * z.i) + c.i;
+		z.r = tmp;
+		i++;
 	}
-	return (result * sign);
+	return (escape_speed(z, i));
 }

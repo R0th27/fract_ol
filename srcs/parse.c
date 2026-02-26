@@ -6,11 +6,28 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:07:08 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 18:08:27 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/26 20:18:22 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int	init_fractal(t_fractal *f)
+{
+	f->zoom = WIDTH / 4.0;
+	f->offset_x = -0.5;
+	f->offset_y = 0;
+	f->colour_shift = 0;
+	f->mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
+	if (!f->mlx)
+		return (error_print("MLX INIT FAILED\n"), 0);
+	f->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
+	if (!f->img)
+		return (error_print("MLX IMG FAILED\n"), 0);
+	if (mlx_image_to_window(f->mlx, f->img, 0, 0) < 0)
+		return (error_print("MLX IMG2WIN FAILED\n"), 0);
+	return (1);
+}
 
 static int	parse_init(t_fractal *f, char **av, t_type type)
 {
@@ -29,8 +46,8 @@ static int	parse_init(t_fractal *f, char **av, t_type type)
 
 static void	color_mode_init(t_fractal *f, char *mode)
 {
-	if (!ft_strncmp(mode, "cyclic", 7))
-		f->colour_mode = CYCLIC;
+	if (!ft_strncmp(mode, "psyche", 7))
+		f->colour_mode = PSYCHEDELIC;
 	else
 		f->colour_mode = GRADIENT;
 }

@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 19:00:37 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/26 20:24:25 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum e_type
 typedef enum e_color
 {
 	GRADIENT,
-	CYCLIC
+	PSYCHEDELIC
 }	t_color;
 
 typedef struct s_complex
@@ -59,14 +59,27 @@ typedef struct s_fractal
 }	t_fractal;
 
 //parse
-int		parse_args(int ac, char **av, t_fractal *f);
-int		init_fractal(t_fractal *f);
+int			parse_args(int ac, char **av, t_fractal *f);
+int			init_fractal(t_fractal *f);
+
+//rendering
+void		render(t_fractal *f);
+void		update_iterations(t_fractal *f);
+t_complex	interpolation(int x, int y, t_fractal *f);
+double		iterate(t_complex p, t_fractal *f);
+
+//fractals
+double		mandelbrot(t_complex c, t_fractal *f);
+double		julia(t_complex z, t_fractal *f);
+double		burning_ship(t_complex c, t_fractal *f);
+
+//coloring
+double		escape_speed(t_complex z, int iter);
+int32_t		get_color(double mu, t_fractal *f);
 
 //utils
-double	ft_atod(char *s);
-
-//error
-void	error_print(char *msg);
-void	usage_error(void);
+double		ft_atod(char *s);
+void		error_print(char *msg);
+void		usage_error(void);
 
 #endif
