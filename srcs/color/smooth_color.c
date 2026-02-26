@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:55:47 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 22:15:05 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/26 22:30:01 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int32_t	rgba(int32_t r, int32_t g, int32_t b, int32_t a)
 static int32_t	psychedelic(double mu, t_fractal *f)
 {
 	double	t;
-	int32_t	r;
-	int32_t	g;
-	int32_t	b;
+	uint32_t	r;
+	uint32_t	g;
+	uint32_t	b;
 
 	t = mu / f->max_iter;
 	t = pow(t, 0.7);
@@ -36,9 +36,9 @@ static int32_t	psychedelic(double mu, t_fractal *f)
 static int32_t	gradient(double mu, t_fractal *f)
 {
 	double	t;
-	int32_t	r;
-	int32_t	g;
-	int32_t	b;
+	uint32_t	r;
+	uint32_t	g;
+	uint32_t	b;
 
 	t = mu / f->max_iter;
 	t = log(1.0 + 9.0 * t) / log(10.0);
