@@ -6,14 +6,14 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/19 15:09:23 by htoe              #+#    #+#              #
-#    Updated: 2026/02/26 17:44:53 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/27 00:39:26 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .DEFAULT_GOAL := all
 
 #Compilation & Commands
-NAME		:= a.out
+NAME		:= fractol
 CC 			:= cc
 CFLAGS 		:= -Wall -Wextra -Werror -Wunreachable-code -Ofast
 CINCLUDE	:= -Iinclude -Ilibft/include -IMLX42/include
@@ -27,8 +27,18 @@ LIBFT		:= libft
 MLX_BUILD 	:= MLX42/build
 
 #Sources
-SRCS 		:= ${wildcard ${SRCDIR}/*.c} \
-				${wildcard ${SRCDIR}/*/*.c}
+SRCS 		:= \
+			${SRCDIR}/main.c \
+			${SRCDIR}/parse.c \
+			${SRCDIR}/render/render.c \
+			${SRCDIR}/render/render_utils.c \
+			${SRCDIR}/events/hooks.c \
+			${SRCDIR}/color/smooth_color.c \
+			${SRCDIR}/fractals/mandelbrot.c \
+			${SRCDIR}/fractals/julia.c \
+			${SRCDIR}/fractals/burning_ship.c \
+			${SRCDIR}/utils/error.c \
+			${SRCDIR}/utils/math_utils.c
 OBJS 		:= ${SRCS:${SRCDIR}/%.c=${OBJDIR}/%.o}
 LIB 		:= libft/libft.a
 MLXLIB 		:= MLX42/build/libmlx42.a
@@ -63,12 +73,12 @@ clean:
 	@if [ -d ${MLX_BUILD} ]; then \
 		make -s -C ${MLX_BUILD} clean; \
 	fi
-#@make clean -s -C ${LIBFT}
+	@make clean -s -C ${LIBFT}
 
 fclean: clean
 	@${RM} ${NAME}
 	@${RM} ${MLX_BUILD}
-#	@make fclean -s -C ${LIBFT}
+	@make fclean -s -C ${LIBFT}
 
 re: fclean all
 

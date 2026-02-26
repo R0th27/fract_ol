@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 22:07:19 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/26 23:26:11 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ double		burning_ship(t_complex c, t_fractal *f);
 //coloring
 double		escape_speed(t_complex z, int iter, int max_iter);
 int32_t		get_color(double mu, t_fractal *f);
+
+//events
+void		setup_hooks(t_fractal *f);
 
 //utils
 double		ft_atod(char *s);

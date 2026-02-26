@@ -33,3 +33,12 @@ Expected:
 ✅ complex symmetric fractal
 
 ---
+
+## tests
+
+./fractol julia -0.8 0.156
+./fractol julia -0.4 0.6
+./fractol julia 0.285 0.01
+./fractol julia -0.70176 -0.3842
+./fractol burning_ship
+./fractol mandelbrot

@@ -6,12 +6,11 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:29 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 21:41:47 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/26 23:26:24 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <time.h>
 
 int	main(int argc, char **argv)
 {
@@ -22,6 +21,7 @@ int	main(int argc, char **argv)
 	if (!init_fractal(&f))
 		return (EXIT_FAILURE);
 	render(&f);
+	setup_hooks(&f);
 	mlx_loop(f.mlx);
 	mlx_terminate(f.mlx);
 	return (EXIT_SUCCESS);
