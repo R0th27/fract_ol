@@ -6,11 +6,12 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:29 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 20:24:31 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/26 21:41:47 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <time.h>
 
 int	main(int argc, char **argv)
 {

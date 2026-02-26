@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:15:07 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 20:24:40 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/26 22:02:24 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	render(t_fractal *f)
 	double		mu;
 	int			color;
 
-	(void)color;
 	update_iterations(f);
 	y = -1;
 	while (++y < HEIGHT)

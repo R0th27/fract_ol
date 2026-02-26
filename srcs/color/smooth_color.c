@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:55:47 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 20:33:53 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/26 22:15:05 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ static int32_t	psychedelic(double mu, t_fractal *f)
 	int32_t	g;
 	int32_t	b;
 
-	t = (mu * 0.15) + f->colour_shift;
+	t = mu / f->max_iter;
+	t = pow(t, 0.7);
+	t = t * 20.0 + f->colour_shift;
 	r = sin(t) * 127 + 128;
 	g = sin(t * 1.3 + 2) * 127 + 128;
 	b = sin(t * 1.7 + 4) * 127 + 128;
@@ -38,25 +40,31 @@ static int32_t	gradient(double mu, t_fractal *f)
 	int32_t	g;
 	int32_t	b;
 
-	t = (mu * 0.05) + f->colour_shift;
-	r = (sin(t) + 1) * 127;
-	g = (sin(t + 2.0) + 1) * 127;
-	b = (sin(t + 4.0) + 1) * 127;
+	t = mu / f->max_iter;
+	t = log(1.0 + 9.0 * t) / log(10.0);
+	t = t * 8.0 + f->colour_shift;
+	r = (sin(t) * 127) + 128;
+	g = (sin(t + 2.094) * 127) + 128;
+	b = (sin(t + 4.188) * 127) + 128;
 	return (rgba(r, g, b, 255));
 }
 
-double	escape_speed(t_complex z, int iter)
+double	escape_speed(t_complex z, int iter, int max_iter)
 {
 	double	mod;
 
-	if (iter <= 0)
-		return (iter);
+	if (iter == max_iter)
+		return (-1.0);
+	if (iter == 0)
+		return (0);
 	mod = (z.r * z.r) + (z.i * z.i);
-	return (iter + 1 - log2(log(mod) / 2.0));
+	return (iter + 1 - log(log(mod)) / log(2.0));
 }
 
 int32_t	get_color(double mu, t_fractal *f)
 {
+	if (mu < 0)
+		return (rgba(0, 0, 0, 255));
 	if (f->colour_mode == PSYCHEDELIC)
 		return (psychedelic(mu, f));
 	return (gradient(mu, f));

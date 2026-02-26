@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 20:24:25 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/26 22:07:19 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ double		julia(t_complex z, t_fractal *f);
 double		burning_ship(t_complex c, t_fractal *f);
 
 //coloring
-double		escape_speed(t_complex z, int iter);
+double		escape_speed(t_complex z, int iter, int max_iter);
 int32_t		get_color(double mu, t_fractal *f);
 
 //utils

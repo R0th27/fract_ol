@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:45:57 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 19:48:57 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/26 22:07:35 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ double	julia(t_complex z, t_fractal *f)
 		z.r = tmp;
 		i++;
 	}
-	return (escape_speed(z, i));
+	return (escape_speed(z, i, f->max_iter));
 }
