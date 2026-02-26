@@ -6,12 +6,15 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 18:09:34 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/26 19:00:37 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
+
+# define WIDTH 1200
+# define HEIGHT 800
 
 # include <MLX42/MLX42.h>
 # include <stdio.h>
@@ -57,6 +60,7 @@ typedef struct s_fractal
 
 //parse
 int		parse_args(int ac, char **av, t_fractal *f);
+int		init_fractal(t_fractal *f);
 
 //utils
 double	ft_atod(char *s);
