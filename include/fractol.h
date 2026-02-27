@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 16:22:53 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 18:04:08 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <stdint.h>
 # include <unistd.h>
+# include <sys/time.h>
 # include <math.h>
 # include "libft.h"
 
@@ -25,13 +26,15 @@ typedef enum e_type
 {
 	MANDELBROT,
 	JULIA,
-	BURNING_SHIP
+	BURNING_SHIP,
 }	t_type;
 
 typedef enum e_palette_t
 {
 	GRADIENT,
-	PSYCHEDELIC
+	PSYCHEDELIC,
+	OCEAN,
+	TIME,
 }	t_palette_t;
 
 typedef struct s_palette
@@ -80,6 +83,8 @@ typedef struct s_fractal
 	t_palette	pal;
 	double		colour_shift;
 	double		colour_scale;
+	double		last_time;
+	double		palette_speed;
 	t_render	render;
 }	t_fractal;
 
@@ -102,12 +107,14 @@ double		burning_ship(t_complex c, t_fractal *f);
 //coloring
 void		update_palette(t_fractal *f);
 void		colouring(t_fractal *f);
+void		time_animate(t_fractal *f);
 
 //events
 void		setup_hooks(t_fractal *f);
 void		main_loop(void *param);
 
 //utils
+double		get_time(void);
 double		ft_atod(char *s);
 void		error_print(char *msg);
 void		usage_error(void);

@@ -6,11 +6,27 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:07:08 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 13:22:49 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 17:52:52 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+static int	init_graphic(t_fractal *f)
+{
+	f->mu_buf = malloc(sizeof(double) * f->width * f->height);
+	if (!f->mu_buf)
+		return (error_print("malloc failed\n"), 0);
+	f->mlx = mlx_init(f->width, f->height, "fractol", true);
+	if (!f->mlx)
+		return (error_print("MLX INIT FAILED\n"), 0);
+	f->img = mlx_new_image(f->mlx, f->width, f->height);
+	if (!f->img)
+		return (error_print("MLX IMG FAILED\n"), 0);
+	if (mlx_image_to_window(f->mlx, f->img, 0, 0) < 0)
+		return (error_print("MLX IMG2WIN FAILED\n"), 0);
+	return (1);
+}
 
 int	init_fractal(t_fractal *f)
 {
@@ -25,19 +41,10 @@ int	init_fractal(t_fractal *f)
 	f->render.need_recompute = 1;
 	f->render.need_recolour = 0;
 	f->render.computing_row = 0;
+	f->last_time = get_time();
+	f->palette_speed = 0.4;
 	update_palette(f);
-	f->mu_buf = malloc(sizeof(double) * f->width * f->height);
-	if (!f->mu_buf)
-		return (error_print("malloc failed\n"), 0);
-	f->mlx = mlx_init(f->width, f->height, "fractol", true);
-	if (!f->mlx)
-		return (error_print("MLX INIT FAILED\n"), 0);
-	f->img = mlx_new_image(f->mlx, f->width, f->height);
-	if (!f->img)
-		return (error_print("MLX IMG FAILED\n"), 0);
-	if (mlx_image_to_window(f->mlx, f->img, 0, 0) < 0)
-		return (error_print("MLX IMG2WIN FAILED\n"), 0);
-	return (1);
+	return (init_graphic(f));
 }
 
 static int	parse_init(t_fractal *f, char **av, t_type type)

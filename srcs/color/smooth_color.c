@@ -6,11 +6,28 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:55:47 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 13:25:07 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 18:05:13 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	time_animate(t_fractal *f)
+{
+	double	now;
+	double	delta;
+
+	now = get_time();
+	delta = now - f->last_time;
+	f->last_time = now;
+	if (delta > 0.05)
+		delta = 0.05;
+	if (!f->render.need_recompute)
+	{
+		f->colour_shift += f->palette_speed * delta;
+		f->render.need_recolour = 1;
+	}
+}
 
 static int	clamp(double x)
 {

@@ -6,11 +6,27 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 23:24:59 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 16:54:59 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 18:04:12 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+static void	resize_hook(int32_t width, int32_t height, void *param)
+{
+	t_fractal	*f;
+
+	f = param;
+	if (width <= 0 || height <= 0)
+		return ;
+	f->width = width;
+	f->height = height;
+	mlx_resize_image(f->img, width, height);
+	free(f->mu_buf);
+	f->mu_buf = (double *)malloc(sizeof(double) * width * height);
+	f->render.computing_row = 0;
+	f->render.need_recompute = 1;
+}
 
 static void	close_hook(void *param)
 {
@@ -53,7 +69,7 @@ static void	key_press(mlx_key_data_t keydata, void *param)
 		return ;
 	if (keydata.key == MLX_KEY_C)
 	{
-		if (f->colour_mode == PSYCHEDELIC)
+		if (f->colour_mode == TIME)
 			f->colour_mode = GRADIENT;
 		else
 			f->colour_mode++;
@@ -67,5 +83,6 @@ void	setup_hooks(t_fractal *f)
 	mlx_scroll_hook(f->mlx, scroll_hook, f);
 	mlx_close_hook(f->mlx, close_hook, f);
 	mlx_key_hook(f->mlx, key_press, f);
+	mlx_resize_hook(f->mlx, resize_hook, f);
 	mlx_loop_hook(f->mlx, main_loop, f);
 }

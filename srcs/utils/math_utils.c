@@ -6,11 +6,19 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:09:15 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 19:38:27 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 17:50:18 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+double	get_time(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec + tv.tv_usec / 1000000.0);
+}
 
 double	ft_atod(char *s)
 {
