@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:07:08 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 00:29:01 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 06:48:00 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ int	init_fractal(t_fractal *f)
 	f->offset_y = 0;
 	f->colour_shift = 0;
 	f->colour_mode = GRADIENT;
+	update_palette(f);
+	f->mu_buf = malloc(sizeof(double) * WIDTH * HEIGHT);
+	if (!f->mu_buf)
+		return (error_print("malloc failed\n"), 0);
 	f->mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
 	if (!f->mlx)
 		return (error_print("MLX INIT FAILED\n"), 0);
 	f->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
 	if (!f->img)
 		return (error_print("MLX IMG FAILED\n"), 0);
-	if (mlx_image_to_window(f->mlx, f->img, 0, 0) < 0)
-		return (error_print("MLX IMG2WIN FAILED\n"), 0);
 	return (1);
 }
 

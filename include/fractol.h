@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 23:26:11 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 06:47:38 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,19 @@ typedef enum e_type
 	BURNING_SHIP
 }	t_type;
 
-typedef enum e_color
+typedef struct s_palette
+{
+	double	a[3];
+	double	b[3];
+	double	c[3];
+	double	d[3];
+}	t_palette;
+
+typedef enum e_palette_t
 {
 	GRADIENT,
 	PSYCHEDELIC
-}	t_color;
+}	t_palette_t;
 
 typedef struct s_complex
 {
@@ -54,7 +62,9 @@ typedef struct s_fractal
 	double		julia_cr;
 	double		julia_ci;
 	int			max_iter;
-	t_color		colour_mode;
+	double		*mu_buf;
+	t_palette_t	colour_mode;
+	t_palette	pal;
 	double		colour_shift;
 }	t_fractal;
 
@@ -62,11 +72,12 @@ typedef struct s_fractal
 int			parse_args(int ac, char **av, t_fractal *f);
 int			init_fractal(t_fractal *f);
 
-//rendering
-void		render(t_fractal *f);
+//computing
+void		computing_fractal(t_fractal *f);
 void		update_iterations(t_fractal *f);
 t_complex	interpolation(int x, int y, t_fractal *f);
 double		iterate(t_complex p, t_fractal *f);
+double		escape_speed(t_complex z, int iter, int max_iter);
 
 //fractals
 double		mandelbrot(t_complex c, t_fractal *f);
@@ -74,8 +85,8 @@ double		julia(t_complex z, t_fractal *f);
 double		burning_ship(t_complex c, t_fractal *f);
 
 //coloring
-double		escape_speed(t_complex z, int iter, int max_iter);
-int32_t		get_color(double mu, t_fractal *f);
+void		update_palette(t_fractal *f);
+void		coloring(t_fractal *f);
 
 //events
 void		setup_hooks(t_fractal *f);

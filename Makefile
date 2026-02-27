@@ -6,14 +6,14 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/19 15:09:23 by htoe              #+#    #+#              #
-#    Updated: 2026/02/27 00:39:26 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/27 06:52:00 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .DEFAULT_GOAL := all
 
 #Compilation & Commands
-NAME		:= fractol
+NAME		:= a.out
 CC 			:= cc
 CFLAGS 		:= -Wall -Wextra -Werror -Wunreachable-code -Ofast
 CINCLUDE	:= -Iinclude -Ilibft/include -IMLX42/include
@@ -30,13 +30,14 @@ MLX_BUILD 	:= MLX42/build
 SRCS 		:= \
 			${SRCDIR}/main.c \
 			${SRCDIR}/parse.c \
-			${SRCDIR}/render/render.c \
-			${SRCDIR}/render/render_utils.c \
-			${SRCDIR}/events/hooks.c \
-			${SRCDIR}/color/smooth_color.c \
+			${SRCDIR}/fractals/computing.c \
+			${SRCDIR}/fractals/computing_utils.c \
 			${SRCDIR}/fractals/mandelbrot.c \
 			${SRCDIR}/fractals/julia.c \
 			${SRCDIR}/fractals/burning_ship.c \
+			${SRCDIR}/events/hooks.c \
+			${SRCDIR}/color/smooth_color.c \
+			${SRCDIR}/color/palette.c \
 			${SRCDIR}/utils/error.c \
 			${SRCDIR}/utils/math_utils.c
 OBJS 		:= ${SRCS:${SRCDIR}/%.c=${OBJDIR}/%.o}

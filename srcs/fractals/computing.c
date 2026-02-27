@@ -6,21 +6,22 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:15:07 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 22:02:24 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 06:27:21 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	render(t_fractal *f)
+void	computing_fractal(t_fractal *f)
 {
 	int			x;
 	int			y;
 	t_complex	p;
 	double		mu;
-	int			color;
+	int			i;
 
 	update_iterations(f);
+	i = 0;
 	y = -1;
 	while (++y < HEIGHT)
 	{
@@ -29,8 +30,7 @@ void	render(t_fractal *f)
 		{
 			p = interpolation(x, y, f);
 			mu = iterate(p, f);
-			color = get_color(mu, f);
-			mlx_put_pixel(f->img, x, y, color);
+			f->mu_buf[i++] = mu;
 		}
 	}
 }

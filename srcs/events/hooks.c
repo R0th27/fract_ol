@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 23:24:59 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 00:26:03 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 06:54:47 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	scroll_hook(double xdelta, double ydelta, void *param)
 	f->zoom *= zoom_factor;
 	f->offset_x = mouse.r - (mx - WIDTH / 2.0) / f->zoom;
 	f->offset_y = mouse.i - (my - HEIGHT / 2.0) / f->zoom;
-	render(f);
 }
 
 static void	key_hook(void *param)
@@ -55,7 +54,6 @@ static void	key_hook(void *param)
 		f->colour_shift += 0.05;
 	if (mlx_is_key_down(f->mlx, MLX_KEY_E))
 		f->colour_shift -= 0.05;
-	render(f);
 }
 
 static void	key_press(mlx_key_data_t keydata, void *param)
@@ -72,7 +70,8 @@ static void	key_press(mlx_key_data_t keydata, void *param)
 		else
 			f->colour_mode = GRADIENT;
 	}
-	render(f);
+	update_palette(f);
+	coloring(f);
 }
 
 void	setup_hooks(t_fractal *f)

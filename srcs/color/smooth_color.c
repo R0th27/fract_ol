@@ -6,54 +6,63 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:55:47 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 23:38:00 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 07:39:46 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int32_t	rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a)
+static int	clamp(double x)
 {
-	return (a << 24 | b << 16 | g << 8 | r);
+	if (x < 0)
+		x = 0;
+	if (x > 1)
+		x = 1;
+	return ((int)(x * 255.0 + 0.5));
 }
 
-static int32_t	psychedelic(double mu, t_fractal *f)
+static int	colour_generator(double t, t_palette p)
 {
-	double		t;
-	uint32_t	r;
-	uint32_t	g;
-	uint32_t	b;
+	double	r;
+	double	g;
+	double	b;
 
-	t = mu / f->max_iter;
-	t = pow(t, 0.7);
-	t = t * 15.0 + f->colour_shift;
-	r = sin(t) * 127 + 128;
-	g = sin(t * 1.3 + 2) * 127 + 128;
-	b = sin(t * 1.7 + 4) * 127 + 128;
-	return (rgba(r, g, b, 255));
+	r = p.a[0] + (p.b[0] * cos(6.28318 * (p.c[0] * t + p.d[0])));
+	g = p.a[1] + (p.b[1] * cos(6.28318 * (p.c[1] * t + p.d[1])));
+	b = p.a[2] + (p.b[2] * cos(6.28318 * (p.c[2] * t + p.d[2])));
+	return (clamp(r) << 24 | clamp(g) << 16 | clamp(b) << 8 | 255);
 }
 
-static int32_t	gradient(double mu, t_fractal *f)
+static int	get_colour(t_fractal *f, int i)
 {
-	double		t;
-	uint32_t	r;
-	uint32_t	g;
-	uint32_t	b;
+	double	t;
 
-	t = mu / f->max_iter;
-	t = log(1.0 + 9.0 * t) / log(10.0);
-	t = t * 8.0 + f->colour_shift;
-	r = (sin(t) * 127) + 128;
-	g = (sin(t + 2.094) * 127) + 128;
-	b = (sin(t + 4.188) * 127) + 128;
-	return (rgba(r, g, b, 255));
+	t = f->mu_buf[i];
+	if (t < 0)
+		return (0 << 24 | 0 << 16 | 0 << 8 | 255);
+	t *= 0.035;
+	t = fmod(t, 1.0);
+	return (colour_generator(t, f->pal));
 }
 
-int32_t	get_color(double mu, t_fractal *f)
+void	coloring(t_fractal *f)
 {
-	if (mu < 0)
-		return (rgba(0, 0, 0, 255));
-	if (f->colour_mode == PSYCHEDELIC)
-		return (psychedelic(mu, f));
-	return (gradient(mu, f));
+	int		x;
+	int		y;
+	int		i;
+	int		colour;
+
+	i = 0;
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+		{
+			colour = get_colour(f, i);
+			mlx_put_pixel(f->img, x, y, colour);
+			i++;
+		}
+	}
+	mlx_image_to_window(f->mlx, f->img, 0, 0);
 }
