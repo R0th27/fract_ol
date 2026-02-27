@@ -6,28 +6,28 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 06:42:53 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 18:10:45 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 19:31:52 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static t_palette	get_deepspace_palette(void)
+static t_palette	get_aurora_palette(void)
 {
 	t_palette	p;
 
-	p.a[0] = 0.45;
-	p.a[1] = 0.45;
-	p.a[2] = 0.55;
-	p.b[0] = 0.55;
-	p.b[1] = 0.45;
-	p.b[2] = 0.35;
-	p.c[0] = 1.0;
-	p.c[1] = 1.2;
-	p.c[2] = 1.4;
-	p.d[0] = 0.3;
-	p.d[1] = 0.2;
-	p.d[2] = 0.1;
+	p.a[0] = 0.40;
+	p.a[1] = 0.60;
+	p.a[2] = 0.50;
+	p.b[0] = 0.60;
+	p.b[1] = 0.40;
+	p.b[2] = 0.60;
+	p.c[0] = 1.2;
+	p.c[1] = 1.0;
+	p.c[2] = 0.8;
+	p.d[0] = 0.15;
+	p.d[1] = 0.55;
+	p.d[2] = 0.85;
 	return (p);
 }
 
@@ -97,5 +97,5 @@ void	update_palette(t_fractal *f)
 	else if (f->colour_mode == OCEAN)
 		f->pal = get_ocean_palette();
 	else
-		f->pal = get_deepspace_palette();
+		f->pal = get_aurora_palette();
 }

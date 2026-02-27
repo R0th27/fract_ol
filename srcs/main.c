@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:29 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 12:03:13 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 19:35:11 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	setup_hooks(&f);
 	mlx_loop(f.mlx);
-	mlx_terminate(f.mlx);
 	free(f.mu_buf);
+	mlx_terminate(f.mlx);
 	return (EXIT_SUCCESS);
 }
