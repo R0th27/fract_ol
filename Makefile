@@ -6,7 +6,7 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/19 15:09:23 by htoe              #+#    #+#              #
-#    Updated: 2026/02/27 15:59:45 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/27 16:32:15 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS 		:= \
 			${SRCDIR}/fractals/julia.c \
 			${SRCDIR}/fractals/burning_ship.c \
 			${SRCDIR}/events/hooks.c \
+			${SRCDIR}/events/events.c \
 			${SRCDIR}/color/smooth_color.c \
 			${SRCDIR}/color/palette.c \
 			${SRCDIR}/utils/error.c \

@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 13:22:38 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 16:22:53 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void		colouring(t_fractal *f);
 
 //events
 void		setup_hooks(t_fractal *f);
+void		main_loop(void *param);
 
 //utils
 double		ft_atod(char *s);
