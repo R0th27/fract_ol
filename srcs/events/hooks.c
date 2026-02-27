@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 23:24:59 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 18:04:12 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 23:21:04 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	resize_hook(int32_t width, int32_t height, void *param)
 {
 	t_fractal	*f;
+	double		*new_buf;
 
 	f = param;
 	if (width <= 0 || height <= 0)
@@ -22,8 +23,11 @@ static void	resize_hook(int32_t width, int32_t height, void *param)
 	f->width = width;
 	f->height = height;
 	mlx_resize_image(f->img, width, height);
+	new_buf = (double *)malloc(sizeof(double) * width * height);
+	if (!new_buf)
+		return ;
 	free(f->mu_buf);
-	f->mu_buf = (double *)malloc(sizeof(double) * width * height);
+	f->mu_buf = new_buf;
 	f->render.computing_row = 0;
 	f->render.need_recompute = 1;
 }
@@ -69,13 +73,10 @@ static void	key_press(mlx_key_data_t keydata, void *param)
 		return ;
 	if (keydata.key == MLX_KEY_C)
 	{
-		if (f->colour_mode == TIME)
-			f->colour_mode = GRADIENT;
-		else
-			f->colour_mode++;
+		f->colour_mode = (f->colour_mode + 1) % 4;
+		update_palette(f);
+		f->render.need_recolour = 1;
 	}
-	update_palette(f);
-	f->render.need_recolour = 1;
 }
 
 void	setup_hooks(t_fractal *f)

@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 18:04:08 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 23:55:39 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum e_palette_t
 	GRADIENT,
 	PSYCHEDELIC,
 	OCEAN,
-	TIME,
+	TIME
 }	t_palette_t;
 
 typedef struct s_palette
@@ -67,25 +67,26 @@ typedef struct s_render
 
 typedef struct s_fractal
 {
-	mlx_t		*mlx;
 	mlx_image_t	*img;
 	int			width;
 	int			height;
-	t_type		type;
+	double		*mu_buf;
+	t_render	render;
 	double		zoom;
 	double		offset_x;
 	double		offset_y;
+	t_type		type;
+	int			max_iter;
 	double		julia_cr;
 	double		julia_ci;
-	int			max_iter;
-	double		*mu_buf;
 	t_palette_t	colour_mode;
 	t_palette	pal;
 	double		colour_shift;
 	double		colour_scale;
 	double		last_time;
 	double		palette_speed;
-	t_render	render;
+	double		anim_phase;
+	mlx_t		*mlx;
 }	t_fractal;
 
 //parse
