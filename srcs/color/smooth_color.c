@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:55:47 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 07:39:46 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 13:25:07 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,27 @@ static int	get_colour(t_fractal *f, int i)
 	t = f->mu_buf[i];
 	if (t < 0)
 		return (0 << 24 | 0 << 16 | 0 << 8 | 255);
-	t *= 0.035;
+	t = (t + f->colour_shift) * f->colour_scale;
 	t = fmod(t, 1.0);
 	return (colour_generator(t, f->pal));
 }
 
-void	coloring(t_fractal *f)
+void	colouring(t_fractal *f)
 {
-	int		x;
-	int		y;
-	int		i;
-	int		colour;
+	t_matrix	para;
+	int			colour;
 
-	i = 0;
-	y = -1;
-	while (++y < HEIGHT)
+	para.i = 0;
+	para.row = -1;
+	while (++para.row < f->height)
 	{
-		x = -1;
-		while (++x < WIDTH)
+		para.x = -1;
+		while (++para.x < f->width)
 		{
-			colour = get_colour(f, i);
-			mlx_put_pixel(f->img, x, y, colour);
-			i++;
+			colour = get_colour(f, para.i);
+			mlx_put_pixel(f->img, para.x, para.row, colour);
+			para.i++;
 		}
 	}
-	mlx_image_to_window(f->mlx, f->img, 0, 0);
+	f->render.need_recolour = 0;
 }

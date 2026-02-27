@@ -6,7 +6,7 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/19 15:09:23 by htoe              #+#    #+#              #
-#    Updated: 2026/02/27 06:52:00 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/27 13:25:37 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,15 +71,15 @@ all: ${NAME}
 clean:
 	@echo "CLEANING"
 	@${RM} ${OBJDIR}
-	@if [ -d ${MLX_BUILD} ]; then \
-		make -s -C ${MLX_BUILD} clean; \
-	fi
-	@make clean -s -C ${LIBFT}
+#	@if [ -d ${MLX_BUILD} ]; then \
+#		make -s -C ${MLX_BUILD} clean; \
+#	fi
+#	@make clean -s -C ${LIBFT}
 
 fclean: clean
 	@${RM} ${NAME}
-	@${RM} ${MLX_BUILD}
-	@make fclean -s -C ${LIBFT}
+#	@${RM} ${MLX_BUILD}
+#	@make fclean -s -C ${LIBFT}
 
 re: fclean all
 

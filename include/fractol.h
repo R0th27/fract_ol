@@ -6,15 +6,12 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 06:47:38 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 13:22:38 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-
-# define WIDTH 1200
-# define HEIGHT 800
 
 # include <MLX42/MLX42.h>
 # include <stdio.h>
@@ -31,6 +28,12 @@ typedef enum e_type
 	BURNING_SHIP
 }	t_type;
 
+typedef enum e_palette_t
+{
+	GRADIENT,
+	PSYCHEDELIC
+}	t_palette_t;
+
 typedef struct s_palette
 {
 	double	a[3];
@@ -39,22 +42,32 @@ typedef struct s_palette
 	double	d[3];
 }	t_palette;
 
-typedef enum e_palette_t
-{
-	GRADIENT,
-	PSYCHEDELIC
-}	t_palette_t;
-
 typedef struct s_complex
 {
 	double	r;
 	double	i;
 }	t_complex;
 
+typedef struct s_matrix
+{
+	int	x;
+	int	row;
+	int	i;
+}	t_matrix;
+
+typedef struct s_render
+{
+	int	computing_row;
+	int	need_recompute;
+	int	need_recolour;
+}	t_render;
+
 typedef struct s_fractal
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	int			width;
+	int			height;
 	t_type		type;
 	double		zoom;
 	double		offset_x;
@@ -66,6 +79,8 @@ typedef struct s_fractal
 	t_palette_t	colour_mode;
 	t_palette	pal;
 	double		colour_shift;
+	double		colour_scale;
+	t_render	render;
 }	t_fractal;
 
 //parse
@@ -86,7 +101,7 @@ double		burning_ship(t_complex c, t_fractal *f);
 
 //coloring
 void		update_palette(t_fractal *f);
-void		coloring(t_fractal *f);
+void		colouring(t_fractal *f);
 
 //events
 void		setup_hooks(t_fractal *f);

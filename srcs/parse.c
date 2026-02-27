@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:07:08 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 06:48:00 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 13:22:49 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,29 @@
 
 int	init_fractal(t_fractal *f)
 {
-	f->zoom = WIDTH / 4.0;
+	f->width = 1200;
+	f->height = 800;
+	f->zoom = f->width / 4.0;
 	f->offset_x = -0.5;
 	f->offset_y = 0;
 	f->colour_shift = 0;
+	f->colour_scale = 0.035;
 	f->colour_mode = GRADIENT;
+	f->render.need_recompute = 1;
+	f->render.need_recolour = 0;
+	f->render.computing_row = 0;
 	update_palette(f);
-	f->mu_buf = malloc(sizeof(double) * WIDTH * HEIGHT);
+	f->mu_buf = malloc(sizeof(double) * f->width * f->height);
 	if (!f->mu_buf)
 		return (error_print("malloc failed\n"), 0);
-	f->mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
+	f->mlx = mlx_init(f->width, f->height, "fractol", true);
 	if (!f->mlx)
 		return (error_print("MLX INIT FAILED\n"), 0);
-	f->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
+	f->img = mlx_new_image(f->mlx, f->width, f->height);
 	if (!f->img)
 		return (error_print("MLX IMG FAILED\n"), 0);
+	if (mlx_image_to_window(f->mlx, f->img, 0, 0) < 0)
+		return (error_print("MLX IMG2WIN FAILED\n"), 0);
 	return (1);
 }
 

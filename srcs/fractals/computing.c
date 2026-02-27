@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   computing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:15:07 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 06:27:21 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 13:23:39 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,29 @@
 
 void	computing_fractal(t_fractal *f)
 {
-	int			x;
-	int			y;
+	t_matrix	para;
 	t_complex	p;
 	double		mu;
-	int			i;
 
-	update_iterations(f);
-	i = 0;
-	y = -1;
-	while (++y < HEIGHT)
+	if (!f->render.computing_row)
+		update_iterations(f);
+	para.i = f->render.computing_row * f->width;
+	para.row = 40;
+	while (para.row-- && f->render.computing_row < f->height)
 	{
-		x = -1;
-		while (++x < WIDTH)
+		para.x = -1;
+		while (++para.x < f->width)
 		{
-			p = interpolation(x, y, f);
+			p = interpolation(para.x, f->render.computing_row, f);
 			mu = iterate(p, f);
-			f->mu_buf[i++] = mu;
+			f->mu_buf[para.i++] = mu;
 		}
+		f->render.computing_row++;
+	}
+	if (f->render.computing_row >= f->height)
+	{
+		f->render.computing_row = 0;
+		f->render.need_recompute = 0;
+		f->render.need_recolour = 1;
 	}
 }

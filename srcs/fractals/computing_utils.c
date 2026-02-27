@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_utils.c                                     :+:      :+:    :+:   */
+/*   computing_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:38:14 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 23:36:45 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/27 13:03:18 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ t_complex	interpolation(int x, int y, t_fractal *f)
 {
 	t_complex	c;
 
-	c.r = (x - WIDTH / 2.0) / f->zoom + f->offset_x;
-	c.i = (y - HEIGHT / 2.0) / f->zoom + f->offset_y;
+	c.r = (x - f->width / 2.0) / f->zoom + f->offset_x;
+	c.i = (y - f->height / 2.0) / f->zoom + f->offset_y;
 	return (c);
 }
 
