@@ -189,9 +189,18 @@ Coloring uses cosine-based palettes inspired by GPU shader techniques:
 color(t) = a + b * cos(2π(c * t + d))
 ```
 
+And for the classic palette:
+
+```
+r = 9.0 * (1 - t) * t * t * t;
+g = 15.0 * (1 - t) * (1 - t) * t * t;
+b = 8.5 * (1 - t) * (1 - t) * (1 - t) * t;
+```
+
 Features include:
 
 * Multiple palette modes
+     * Classic
      * Gradient
      * Psychedelic
      * Aurora

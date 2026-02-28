@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 23:24:59 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 15:14:35 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 15:34:41 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	key_press(mlx_key_data_t keydata, void *param)
 		return ;
 	if (keydata.key == MLX_KEY_T)
 	{
-		f->palette_type = (f->palette_type + 1) % 4;
+		f->palette_type = (f->palette_type + 1) % 5;
 		update_palette(f);
 		f->render.need_recolour = 1;
 	}

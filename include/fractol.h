@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 15:13:38 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 15:43:28 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef enum e_type
 
 typedef enum e_palette_t
 {
+	CLASSIC,
 	GRADIENT,
 	PSYCHEDELIC,
 	OCEAN,

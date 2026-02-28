@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:55:47 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 15:14:07 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 16:29:04 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,24 @@ static uint32_t	clamp(double x)
 	return ((uint32_t)(x * 255.0 + 0.5));
 }
 
-static uint32_t	colour_generator(double t, t_palette p)
+static uint32_t	colour_generator(double t, t_palette p, int cosine_wave)
 {
 	double	r;
 	double	g;
 	double	b;
 
-	r = p.a[0] + (p.b[0] * cos(6.28318 * (p.c[0] * t + p.d[0])));
-	g = p.a[1] + (p.b[1] * cos(6.28318 * (p.c[1] * t + p.d[1])));
-	b = p.a[2] + (p.b[2] * cos(6.28318 * (p.c[2] * t + p.d[2])));
+	if (cosine_wave)
+	{
+		r = p.a[0] + (p.b[0] * cos(6.28318 * (p.c[0] * t + p.d[0])));
+		g = p.a[1] + (p.b[1] * cos(6.28318 * (p.c[1] * t + p.d[1])));
+		b = p.a[2] + (p.b[2] * cos(6.28318 * (p.c[2] * t + p.d[2])));
+	}
+	else
+	{
+		r = 9.0 * (1 - t) * t * t * t;
+		g = 15.0 * (1 - t) * (1 - t) * t * t;
+		b = 8.5 * (1 - t) * (1 - t) * (1 - t) * t;
+	}
 	return (255 << 24 | clamp(b) << 16 | clamp(g) << 8 | clamp(r));
 }
 
@@ -61,9 +70,14 @@ static uint32_t	get_colour(t_fractal *f, int i)
 	shift = f->colour_shift;
 	if (f->anim_toggle == ANIM_ON)
 		shift += f->anim_phase;
+	if (f->palette_type == CLASSIC)
+	{
+		t = (t / f->max_iter) + (shift * 0.02);
+		return (colour_generator(t, f->palette, 0));
+	}
 	t = (t + shift) * f->colour_scale;
 	t = fmod(t, 1.0);
-	return (colour_generator(t, f->palette));
+	return (colour_generator(t, f->palette, 1));
 }
 
 void	colouring(t_fractal *f)
