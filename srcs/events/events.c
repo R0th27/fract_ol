@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 16:23:28 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 14:52:29 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 15:16:58 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	main_loop(void *param)
 	t_fractal	*f;
 
 	f = param;
-	if (f->colour_mode == TIME)
+	if (f->anim_toggle == ANIM_ON)
 		time_animate(f);
 	close_detect(f);
 	movement_detect(f);

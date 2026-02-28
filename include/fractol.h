@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 14:52:45 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 15:13:38 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # include <math.h>
 # include "libft.h"
 
-typedef enum e_color_m
+typedef enum e_anim
 {
-	NORMAL,
-	TIME
-}	t_color_m;
+	ANIM_OFF,
+	ANIM_ON
+}	t_anim;
 
 typedef enum e_reset
 {
@@ -97,7 +97,7 @@ typedef struct s_fractal
 	double		last_time;
 	double		palette_speed;
 	double		anim_phase;
-	t_color_m	colour_mode;
+	t_anim		anim_toggle;
 	mlx_t		*mlx;
 }	t_fractal;
 

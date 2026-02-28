@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:07:08 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 15:06:47 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 15:13:49 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	init_fractal(t_fractal *f)
 	f->colour_shift = 0;
 	f->colour_scale = 0.035;
 	f->anim_phase = 0;
-	f->colour_mode = NORMAL;
+	f->anim_toggle = ANIM_OFF;
 	f->palette_type = GRADIENT;
 	f->render.computing_row = 0;
 	f->render.need_recompute = 1;

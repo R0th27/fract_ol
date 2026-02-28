@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 23:24:59 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 15:09:38 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 15:14:35 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	key_press(mlx_key_data_t keydata, void *param)
 	{
 		f->colour_shift += f->anim_phase;
 		f->anim_phase = 0;
-		f->colour_mode ^= 1;
+		f->anim_toggle ^= 1;
 	}
 }
 

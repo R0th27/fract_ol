@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:55:47 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 14:53:28 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 15:14:07 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static uint32_t	get_colour(t_fractal *f, int i)
 	if (t < 0)
 		return (255 << 24 | 0 << 16 | 0 << 8 | 0);
 	shift = f->colour_shift;
-	if (f->colour_mode == TIME)
+	if (f->anim_toggle == ANIM_ON)
 		shift += f->anim_phase;
 	t = (t + shift) * f->colour_scale;
 	t = fmod(t, 1.0);
