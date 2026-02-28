@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:07:08 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 17:52:52 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 11:32:01 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	init_fractal(t_fractal *f)
 	f->width = 1200;
 	f->height = 800;
 	f->zoom = f->width / 4.0;
-	f->offset_x = -0.5;
+	f->offset_x = 0;
 	f->offset_y = 0;
 	f->colour_shift = 0;
 	f->colour_scale = 0.035;

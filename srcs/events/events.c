@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 16:23:28 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 22:49:56 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 12:10:48 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,25 @@ static void	movement_detect(t_fractal *f)
 {
 	if (mlx_is_key_down(f->mlx, MLX_KEY_LEFT))
 	{
-		f->offset_x += 10.0 / f->zoom;
+		f->offset_x -= 10.0 / f->zoom;
 		f->render.computing_row = 0;
 		f->render.need_recompute = 1;
 	}
 	if (mlx_is_key_down(f->mlx, MLX_KEY_RIGHT))
 	{
-		f->offset_x -= 10.0 / f->zoom;
+		f->offset_x += 10.0 / f->zoom;
 		f->render.computing_row = 0;
 		f->render.need_recompute = 1;
 	}
 	if (mlx_is_key_down(f->mlx, MLX_KEY_UP))
 	{
-		f->offset_y += 10.0 / f->zoom;
+		f->offset_y -= 10.0 / f->zoom;
 		f->render.computing_row = 0;
 		f->render.need_recompute = 1;
 	}
 	if (mlx_is_key_down(f->mlx, MLX_KEY_DOWN))
 	{
-		f->offset_y -= 10.0 / f->zoom;
+		f->offset_y += 10.0 / f->zoom;
 		f->render.computing_row = 0;
 		f->render.need_recompute = 1;
 	}

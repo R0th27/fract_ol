@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 23:55:39 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 12:19:20 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FRACTOL_H
 
 # include <MLX42/MLX42.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <stdint.h>
 # include <unistd.h>

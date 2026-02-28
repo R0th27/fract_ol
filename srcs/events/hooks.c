@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 23:24:59 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 23:21:04 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 12:18:39 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	close_hook(void *param)
 
 	f = param;
 	free(f->mu_buf);
+	mlx_terminate(f->mlx);
 	exit(EXIT_SUCCESS);
 }
 
