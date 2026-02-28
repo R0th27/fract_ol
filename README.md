@@ -2,9 +2,9 @@
 
 ## Overview
 
-**fractol** is a real-time fractal exploration program written in C using the **MLX42 graphics library**.
+**fractol** is a real-time fractal rendering engine written in **C** using the **MLX42 graphics library**.
 
-The project renders mathematically generated fractals such as the **Mandelbrot**, **Julia**, and **Burning Ship** sets while supporting smooth zooming, continuous navigation, and dynamic color animation.
+The project renders mathematically generated fractals such as the **Mandelbrot**, **Julia**, and **Burning Ship** sets while supporting infinite zoom, dynamic palettes, and progressive background computation.
 
 Rather than performing naive full-frame recomputation, this implementation separates **fractal computation**, **color mapping**, and **rendering**, enabling responsive interaction even at deep zoom levels.
 
@@ -16,29 +16,48 @@ The project focuses on:
 * Continuous color animation without recomputation
 * Mouse-centered infinite zoom navigation
 
+## Features
+
+* Engine-style modular architecture
+* Mandelbrot fractal
+* Julia fractal (custom parameters)
+* Burning Ship fractal
+* Infinite mouse-centered zoom (double precision limit)
+* Smooth rendering with progressive background computation
+* Multiple cosine-based color palettes
+* Recoloring **without recomputation**
+* Real-time palette switching
+* Colour shifting & scaling
+* Window resizing
+* Arrow-key navigation
+* Reset controls (position & colour)
+* ESC to exit cleanly
+
 ---
 
 ## Repository Structure
 
-```
+```bash
 .
 ├── include
-│   └── fractol.h
+│   └── fractol.h
 ├── libft
 ├── MLX42
-├── srcs
-│   ├── color
-│   │   ├── palette.c
-│   │   └── smooth_color.c
+└── srcs
+│   ├── coloring
+│   │   ├── palette.c
+│   │   └── smooth_color.c
+│   ├── computing
+│   │   ├── computing.c
+│   │   └── computing_utils.c
 │   ├── events
-│   │   ├── events.c
-│   │   └── hooks.c
+│   │   ├── events.c
+│   │   ├── hooks.c
+│   │   └── reset.c
 │   ├── fractals
-│   │   ├── burning_ship.c
-│   │   ├── computing.c
-│   │   ├── computing_utils.c
-│   │   ├── julia.c
-│   │   └── mandelbrot.c
+│   │   ├── burning_ship.c
+│   │   ├── julia.c
+│   │   └── mandelbrot.c
 │   ├── main.c
 │   ├── parse.c
 │   └── utils
@@ -52,7 +71,7 @@ The project focuses on:
 
 ## Design Philosophy
 
-The renderer is structured around **separation of responsibilities**:
+The renderer is structured around **separation of responsibilities** layering and **engine + plugin** model:
 
 ### Computation Layer
 
@@ -71,6 +90,18 @@ Writes pixels directly into the framebuffer for maximum performance.
 Handles input, animation timing, zooming, and navigation independently of computation.
 
 This architecture allows recoloring and animation **without recomputing fractals**, dramatically improving responsiveness.
+
+### Model
+
+```
+Core Engine
+ ├── Fractal plugins
+ ├── Colour palette plugins
+ ├── Event system
+ └── Progressive renderer
+```
+
+This architecture allows addition of new fractals or palettes independently.
 
 ---
 
@@ -102,19 +133,34 @@ Fractal escape values are stored in a dedicated buffer and reused for animation 
 
 Classic escape-time fractal generated from complex plane iteration.
 
+```bash
+./fractol mandelbrot
+```
+
 ### Julia Set
 
 User-defined complex constants allow exploration of related fractal families.
+
+```bash
+./fractol julia -0.8 0.156
+./fractol julia -0.4 0.6
+./fractol julia 0.285 0.01
+./fractol julia -0.70176 -0.3842
+```
 
 ### Burning Ship
 
 Non-linear variant producing highly detailed structures.
 
+```bash
+./fractol burning_ship
+```
+
 ---
 
 ## Real-Time Features
 
-### Smooth Infinite Zoom
+### Smooth Infinite Zoom (Double Precision Limit)
 
 * Mouse-centered zoom interpolation
 * Continuous zoom in/out
@@ -146,6 +192,10 @@ color(t) = a + b * cos(2π(c * t + d))
 Features include:
 
 * Multiple palette modes
+     * Gradient
+     * Psychedelic
+     * Aurora
+     * Ocean-style palettes
 * Continuous palette shifting
 * Dynamic color scaling
 * Time-based animation mode
@@ -194,14 +244,16 @@ Zooming recomputes fractals, while palette changes trigger recoloring only.
 
 ## Controls
 
-| Key / Action | Function           |
-| ------------ | ------------------ |
-| Mouse Scroll | Zoom in / out      |
-| Arrow Keys   | Move view          |
-| C            | Change palette     |
-| A / D        | Shift colors       |
-| W / S        | Adjust color scale |
-| ESC          | Exit               |
+| Key / Mouse  | Action         |
+| ------------ | -------------- |
+| Mouse Scroll | Zoom at cursor |
+| Arrow Keys   | Move view      |
+| A / D        | Colour shift   |
+| W / S        | Colour scale   |
+| T            | Toggle palette |
+| P            | Reset position |
+| C            | Reset colours  |
+| ESC          | Exit program   |
 
 ---
 
@@ -219,17 +271,6 @@ make
 ./fractol mandelbrot
 ./fractol burning_ship
 ./fractol julia <real> <imag>
-```
-
-Example:
-
-```bash
-./fractol julia -0.8 0.156
-./fractol julia -0.4 0.6
-./fractol julia 0.285 0.01
-./fractol julia -0.70176 -0.3842
-./fractol burning_ship
-./fractol mandelbrot
 ```
 
 ---
