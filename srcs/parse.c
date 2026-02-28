@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:07:08 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 13:58:57 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 15:06:47 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ int	init_fractal(t_fractal *f)
 	f->offset_y = 0;
 	f->colour_shift = 0;
 	f->colour_scale = 0.035;
-	f->colour_mode = GRADIENT;
+	f->anim_phase = 0;
+	f->colour_mode = NORMAL;
+	f->palette_type = GRADIENT;
 	f->render.computing_row = 0;
 	f->render.need_recompute = 1;
 	f->render.need_recolour = 0;
@@ -50,12 +52,12 @@ int	init_fractal(t_fractal *f)
 static int	parse_init(t_fractal *f, char **av, t_type type)
 {
 	if (type == MANDELBROT)
-		f->type = MANDELBROT;
+		f->fractal_type = MANDELBROT;
 	else if (type == BURNING_SHIP)
-		f->type = BURNING_SHIP;
+		f->fractal_type = BURNING_SHIP;
 	else if (type == JULIA)
 	{
-		f->type = JULIA;
+		f->fractal_type = JULIA;
 		f->julia_cr = ft_atod(av[2]);
 		f->julia_ci = ft_atod(av[3]);
 	}

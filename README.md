@@ -251,6 +251,7 @@ Zooming recomputes fractals, while palette changes trigger recoloring only.
 | A / D        | Colour shift   |
 | W / S        | Colour scale   |
 | T            | Toggle palette |
+| R            | animate toggle |
 | P            | Reset position |
 | C            | Reset colours  |
 | ESC          | Exit program   |

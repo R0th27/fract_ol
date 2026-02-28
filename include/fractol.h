@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 14:11:34 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 14:52:45 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <sys/time.h>
 # include <math.h>
 # include "libft.h"
+
+typedef enum e_color_m
+{
+	NORMAL,
+	TIME
+}	t_color_m;
 
 typedef enum e_reset
 {
@@ -39,7 +45,7 @@ typedef enum e_palette_t
 	GRADIENT,
 	PSYCHEDELIC,
 	OCEAN,
-	TIME
+	AURORA
 }	t_palette_t;
 
 typedef struct s_palette
@@ -80,17 +86,18 @@ typedef struct s_fractal
 	double		zoom;
 	double		offset_x;
 	double		offset_y;
-	t_type		type;
+	t_type		fractal_type;
 	int			max_iter;
 	double		julia_cr;
 	double		julia_ci;
-	t_palette_t	colour_mode;
-	t_palette	pal;
+	t_palette_t	palette_type;
+	t_palette	palette;
 	double		colour_shift;
 	double		colour_scale;
 	double		last_time;
 	double		palette_speed;
 	double		anim_phase;
+	t_color_m	colour_mode;
 	mlx_t		*mlx;
 }	t_fractal;
 

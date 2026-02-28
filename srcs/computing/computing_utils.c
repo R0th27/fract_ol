@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:38:14 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 13:54:01 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 14:50:49 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ double	precise_escape_point(t_complex z, int iter, int max_iter)
 
 double	iterate(t_complex p, t_fractal *f)
 {
-	if (f->type == MANDELBROT)
+	if (f->fractal_type == MANDELBROT)
 		return (mandelbrot(p, f));
-	else if (f->type == JULIA)
+	else if (f->fractal_type == JULIA)
 		return (julia(p, f));
 	return (burning_ship(p, f));
 }

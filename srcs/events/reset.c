@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 13:54:43 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 14:12:33 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 15:04:29 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	reset_window(t_fractal *f, t_reset mode)
 	}
 	if (mode == COLOUR)
 	{
+		f->anim_phase = 0;
 		f->colour_shift = 0;
 		f->colour_scale = 0.035;
 		f->render.need_recolour = 1;

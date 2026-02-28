@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 06:42:53 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 19:31:52 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 15:09:49 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,12 @@ static t_palette	get_psy_palette(void)
 
 void	update_palette(t_fractal *f)
 {
-	if (f->colour_mode == GRADIENT)
-		f->pal = get_gradient_palette();
-	else if (f->colour_mode == PSYCHEDELIC)
-		f->pal = get_psy_palette();
-	else if (f->colour_mode == OCEAN)
-		f->pal = get_ocean_palette();
+	if (f->palette_type == GRADIENT)
+		f->palette = get_gradient_palette();
+	else if (f->palette_type == PSYCHEDELIC)
+		f->palette = get_psy_palette();
+	else if (f->palette_type == OCEAN)
+		f->palette = get_ocean_palette();
 	else
-		f->pal = get_aurora_palette();
+		f->palette = get_aurora_palette();
 }

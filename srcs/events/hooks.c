@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 23:24:59 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 14:11:20 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 15:09:38 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	key_press(mlx_key_data_t keydata, void *param)
 		return ;
 	if (keydata.key == MLX_KEY_T)
 	{
-		f->colour_mode = (f->colour_mode + 1) % 4;
+		f->palette_type = (f->palette_type + 1) % 4;
 		update_palette(f);
 		f->render.need_recolour = 1;
 	}
@@ -82,6 +82,12 @@ static void	key_press(mlx_key_data_t keydata, void *param)
 		reset_window(f, POSITION);
 	if (keydata.key == MLX_KEY_C)
 		reset_window(f, COLOUR);
+	if (keydata.key == MLX_KEY_R)
+	{
+		f->colour_shift += f->anim_phase;
+		f->anim_phase = 0;
+		f->colour_mode ^= 1;
+	}
 }
 
 void	setup_hooks(t_fractal *f)

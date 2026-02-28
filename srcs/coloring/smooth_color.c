@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:55:47 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 23:57:06 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 14:53:28 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static uint32_t	get_colour(t_fractal *f, int i)
 		shift += f->anim_phase;
 	t = (t + shift) * f->colour_scale;
 	t = fmod(t, 1.0);
-	return (colour_generator(t, f->pal));
+	return (colour_generator(t, f->palette));
 }
 
 void	colouring(t_fractal *f)
