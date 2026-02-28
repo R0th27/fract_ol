@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   reset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/26 19:45:57 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 13:53:52 by htoe             ###   ########.fr       */
+/*   Created: 2026/02/28 13:54:43 by htoe              #+#    #+#             */
+/*   Updated: 2026/02/28 14:12:33 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	julia(t_complex z, t_fractal *f)
+void	reset_window(t_fractal *f, t_reset mode)
 {
-	double		tmp;
-	t_complex	c;
-	int			i;
-
-	c.r = f->julia_cr;
-	c.i = f->julia_ci;
-	i = 0;
-	while ((z.r * z.r) + (z.i * z.i) <= 4 && i < f->max_iter)
+	if (mode == POSITION)
 	{
-		tmp = (z.r * z.r) - (z.i * z.i) + c.r;
-		z.i = (2 * z.r * z.i) + c.i;
-		z.r = tmp;
-		i++;
+		f->zoom = f->width / 4.0;
+		f->offset_x = 0;
+		f->offset_y = 0;
+		f->render.computing_row = 0;
+		f->render.need_recompute = 1;
 	}
-	return (precise_escape_point(z, i, f->max_iter));
+	if (mode == COLOUR)
+	{
+		f->colour_shift = 0;
+		f->colour_scale = 0.035;
+		f->render.need_recolour = 1;
+	}
 }

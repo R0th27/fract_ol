@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:48:17 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/26 22:07:25 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 13:53:22 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ double	burning_ship(t_complex c, t_fractal *f)
 		z.r = tmp;
 		i++;
 	}
-	return (escape_speed(z, i, f->max_iter));
+	return (precise_escape_point(z, i, f->max_iter));
 }

@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 18:07:08 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 11:32:01 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 13:58:57 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	init_graphic(t_fractal *f)
 {
-	f->mu_buf = malloc(sizeof(double) * f->width * f->height);
+	f->mu_buf = (double *)malloc(sizeof(double) * f->width * f->height);
 	if (!f->mu_buf)
 		return (error_print("malloc failed\n"), 0);
 	f->mlx = mlx_init(f->width, f->height, "fractol", true);
@@ -38,9 +38,9 @@ int	init_fractal(t_fractal *f)
 	f->colour_shift = 0;
 	f->colour_scale = 0.035;
 	f->colour_mode = GRADIENT;
+	f->render.computing_row = 0;
 	f->render.need_recompute = 1;
 	f->render.need_recolour = 0;
-	f->render.computing_row = 0;
 	f->last_time = get_time();
 	f->palette_speed = 0.4;
 	update_palette(f);

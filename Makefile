@@ -6,7 +6,7 @@
 #    By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/19 15:09:23 by htoe              #+#    #+#              #
-#    Updated: 2026/02/27 19:36:13 by htoe             ###   ########.fr        #
+#    Updated: 2026/02/28 13:56:35 by htoe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,15 +30,16 @@ MLX_BUILD 	:= MLX42/build
 SRCS 		:= \
 			${SRCDIR}/main.c \
 			${SRCDIR}/parse.c \
-			${SRCDIR}/fractals/computing.c \
-			${SRCDIR}/fractals/computing_utils.c \
+			${SRCDIR}/computing/computing.c \
+			${SRCDIR}/computing/computing_utils.c \
 			${SRCDIR}/fractals/mandelbrot.c \
 			${SRCDIR}/fractals/julia.c \
 			${SRCDIR}/fractals/burning_ship.c \
 			${SRCDIR}/events/hooks.c \
 			${SRCDIR}/events/events.c \
-			${SRCDIR}/color/smooth_color.c \
-			${SRCDIR}/color/palette.c \
+			${SRCDIR}/events/reset.c \
+			${SRCDIR}/coloring/smooth_color.c \
+			${SRCDIR}/coloring/palette.c \
 			${SRCDIR}/utils/error.c \
 			${SRCDIR}/utils/math_utils.c
 OBJS 		:= ${SRCS:${SRCDIR}/%.c=${OBJDIR}/%.o}

@@ -6,7 +6,7 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 17:12:30 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/28 12:19:20 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 14:11:34 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <sys/time.h>
 # include <math.h>
 # include "libft.h"
+
+typedef enum e_reset
+{
+	POSITION,
+	COLOUR
+}	t_reset;
 
 typedef enum e_type
 {
@@ -97,7 +103,7 @@ void		computing_fractal(t_fractal *f);
 void		update_iterations(t_fractal *f);
 t_complex	interpolation(int x, int y, t_fractal *f);
 double		iterate(t_complex p, t_fractal *f);
-double		escape_speed(t_complex z, int iter, int max_iter);
+double		precise_escape_point(t_complex z, int iter, int max_iter);
 
 //fractals
 double		mandelbrot(t_complex c, t_fractal *f);
@@ -112,6 +118,7 @@ void		time_animate(t_fractal *f);
 //events
 void		setup_hooks(t_fractal *f);
 void		main_loop(void *param);
+void		reset_window(t_fractal *f, t_reset mode);
 
 //utils
 double		get_time(void);

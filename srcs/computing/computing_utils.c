@@ -6,13 +6,13 @@
 /*   By: htoe <htoe@student.42bangkok.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 19:38:14 by htoe              #+#    #+#             */
-/*   Updated: 2026/02/27 22:47:14 by htoe             ###   ########.fr       */
+/*   Updated: 2026/02/28 13:54:01 by htoe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	escape_speed(t_complex z, int iter, int max_iter)
+double	precise_escape_point(t_complex z, int iter, int max_iter)
 {
 	double	mod;
 
